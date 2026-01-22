@@ -415,7 +415,7 @@ padding: 0.5rem;
   height: 100vh;
 }
 
-.me-me {
+.hero.hero-animate .me-me {
     position: absolute;
     top: 0;
     left: 0;
@@ -471,7 +471,7 @@ padding: 0.5rem;
   animation: blurIt 3s ease-in-out;
 }
 
-.hero-grid {
+.hero.hero-animate .hero-grid {
   filter: blur(0);
   animation:reverseBlurIt 3s ease-in-out;
 }

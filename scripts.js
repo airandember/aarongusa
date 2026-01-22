@@ -89,6 +89,14 @@ const initPageNavigation = () => {
   let isTransitioning = false;
   const transitionDuration = 500;
 
+  const restartHeroAnimations = () => {
+    const hero = document.getElementById("hero");
+    if (!hero) return;
+    hero.classList.remove("hero-animate");
+    void hero.offsetHeight;
+    hero.classList.add("hero-animate");
+  };
+
   const setActiveSection = (id) => {
     const target = sections.find((section) => section.id === id) || sections[0];
     sections.forEach((section) => {
@@ -101,6 +109,10 @@ const initPageNavigation = () => {
     requestAnimationFrame(() => {
       target.classList.remove("is-entering");
     });
+
+    if (target.id === "hero") {
+      restartHeroAnimations();
+    }
   };
 
   const setActiveNav = (id) => {
