@@ -34,6 +34,12 @@ body {
   scroll-behavior: smooth;
 }
 
+main {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
 img {
   max-width: 100%;
   display: block;
@@ -62,6 +68,7 @@ a {
 
 .container {
   width: min(1100px, 92vw);
+  height: 100%;
   margin: 0 auto;
 }
 
@@ -310,6 +317,7 @@ padding: 0.5rem;
   padding: 6px 0;
   border-bottom: 2px solid transparent;
   transition: color 0.3s ease, border-color 0.3s ease;
+  position: relative;
 }
 
 .site-nav a:hover,
@@ -318,10 +326,76 @@ padding: 0.5rem;
   border-color: var(--gold);
 }
 
+.site-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.site-nav a.is-current::after {
+  transform: scaleX(1);
+}
+
 .section {
   padding: 96px 0;
   position: relative;
   overflow: hidden;
+}
+
+.page-section {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateY(0) scale(1.04);
+  pointer-events: none;
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.page-section.is-active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+  z-index: 1;
+}
+
+.page-section.is-entering {
+  opacity: 0;
+  transform: translateY(0) scale(1.08);
+}
+
+.page-section .container {
+  max-height: 100%;
+  overflow-y: auto;
+  padding-bottom: 80px;
+}
+
+.page-transition {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 12;
+  transition: opacity 0.5s ease;
+}
+
+.page-transition.is-active {
+  pointer-events: auto;
+}
+
+.page-transition.is-fading-out {
+  opacity: 1;
+}
+
+.page-transition.is-fading-in {
+  opacity: 0;
 }
 
 .reveal-target {
@@ -338,7 +412,7 @@ padding: 0.5rem;
 .hero {
   position: relative;
   padding: 120px 0 140px;
-  height: 840px;
+  height: 100vh;
 }
 
 .hero::before {

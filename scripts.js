@@ -79,4 +79,85 @@ const initInteractiveBackground = () => {
 document.addEventListener("DOMContentLoaded", () => {
   revealOnScroll();
   initInteractiveBackground();
+  initPageNavigation();
 });
+
+const initPageNavigation = () => {
+  const sections = Array.from(document.querySelectorAll(".page-section"));
+  const overlay = document.querySelector(".page-transition");
+  if (!sections.length) return;
+  let isTransitioning = false;
+  const transitionDuration = 500;
+
+  const setActiveSection = (id) => {
+    const target = sections.find((section) => section.id === id) || sections[0];
+    sections.forEach((section) => {
+      if (section === target) return;
+      section.classList.remove("is-active");
+      section.classList.remove("is-entering");
+    });
+
+    target.classList.add("is-active", "is-entering");
+    requestAnimationFrame(() => {
+      target.classList.remove("is-entering");
+    });
+  };
+
+  const setActiveNav = (id) => {
+    const links = document.querySelectorAll(".site-nav a");
+    links.forEach((link) => {
+      const href = link.getAttribute("href") || "";
+      const linkId = href.replace("#", "");
+      link.classList.toggle("is-current", linkId === id);
+    });
+  };
+
+  const transitionToSection = (id, instant = false) => {
+    if (isTransitioning || !overlay) {
+      setActiveSection(id);
+      setActiveNav(id);
+      history.replaceState(null, "", `#${id}`);
+      return;
+    }
+
+    if (instant) {
+    setActiveSection(id);
+    setActiveNav(id);
+      history.replaceState(null, "", `#${id}`);
+      return;
+    }
+
+    isTransitioning = true;
+    overlay.classList.add("is-active", "is-fading-out");
+
+    setTimeout(() => {
+      setActiveSection(id);
+      setActiveNav(id);
+      history.replaceState(null, "", `#${id}`);
+      overlay.classList.remove("is-fading-out");
+      overlay.classList.add("is-fading-in");
+
+      setTimeout(() => {
+        overlay.classList.remove("is-fading-in", "is-active");
+        isTransitioning = false;
+      }, transitionDuration);
+    }, transitionDuration);
+  };
+
+  const handleNavigate = (hash, instant = false) => {
+    const id = hash.replace("#", "") || "hero";
+    transitionToSection(id, instant);
+  };
+
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const href = link.getAttribute("href");
+      if (!href) return;
+      event.preventDefault();
+      handleNavigate(href);
+    });
+  });
+
+  window.addEventListener("hashchange", () => handleNavigate(location.hash));
+  handleNavigate(location.hash, true);
+};
