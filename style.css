@@ -82,6 +82,7 @@ h1 {
   width: min(1100px, 92vw);
   height: 100%;
   margin: 0 auto;
+  height: max-content;
 }
 
 .site-header {
@@ -364,8 +365,10 @@ padding: 0.5rem;
 }
 
 .page-section {
+  height: auto;
   position: absolute;
   inset: 0;
+  width: 100%;
   opacity: 0;
   transform: translateY(0) scale(1.04);
   pointer-events: none;
@@ -374,6 +377,7 @@ padding: 0.5rem;
 }
 
 .page-section.is-active {
+  position: absolute;
   opacity: 1;
   transform: translateY(0) scale(1);
   pointer-events: auto;
@@ -401,8 +405,6 @@ padding: 0.5rem;
 }
 
 .page-section .container {
-  max-height: 100%;
-  overflow-y: auto;
   padding-bottom: 80px;
 }
 
@@ -442,7 +444,7 @@ padding: 0.5rem;
 .hero {
   position: relative;
   padding: 120px 0 140px;
-  height: 100vh;
+  height: max-content;
 }
 
 .hero.hero-animate .me-me {
@@ -785,7 +787,9 @@ padding: 0.5rem;
   }
 
   .section {
-    padding: 80px 0;
+    height: 100%;
+    padding: 0 0;
+
   }
 
   .hero-actions {

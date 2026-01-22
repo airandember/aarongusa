@@ -85,6 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
 const initPageNavigation = () => {
   const sections = Array.from(document.querySelectorAll(".page-section"));
   const overlay = document.querySelector(".page-transition");
+  const main = document.querySelector("main");
   if (!sections.length) return;
   let isTransitioning = false;
   const transitionDuration = 500;
@@ -95,6 +96,18 @@ const initPageNavigation = () => {
     hero.classList.remove("hero-animate");
     void hero.offsetHeight;
     hero.classList.add("hero-animate");
+  };
+
+  const syncMainHeight = (section) => {
+    if (!main || !section) return;
+    requestAnimationFrame(() => {
+      const container = section.querySelector(".container");
+      const styles = window.getComputedStyle(section);
+      const paddingTop = parseFloat(styles.paddingTop) || 0;
+      const paddingBottom = parseFloat(styles.paddingBottom) || 0;
+      const contentHeight = container ? container.scrollHeight : section.scrollHeight;
+      main.style.height = `${contentHeight + paddingTop + paddingBottom}px`;
+    });
   };
 
   const setActiveSection = (id) => {
@@ -109,6 +122,7 @@ const initPageNavigation = () => {
     requestAnimationFrame(() => {
       target.classList.remove("is-entering");
     });
+    syncMainHeight(target);
 
     if (target.id === "hero") {
       restartHeroAnimations();
@@ -126,8 +140,9 @@ const initPageNavigation = () => {
 
   const transitionToSection = (id, instant = false) => {
     if (isTransitioning || !overlay) {
-      setActiveSection(id);
-      setActiveNav(id);
+    setActiveSection(id);
+    setActiveNav(id);
+    window.scrollTo({ top: 0, behavior: "auto" });
       history.replaceState(null, "", `#${id}`);
       return;
     }
@@ -135,6 +150,7 @@ const initPageNavigation = () => {
     if (instant) {
     setActiveSection(id);
     setActiveNav(id);
+    window.scrollTo({ top: 0, behavior: "auto" });
       history.replaceState(null, "", `#${id}`);
       return;
     }
@@ -145,6 +161,7 @@ const initPageNavigation = () => {
     setTimeout(() => {
       setActiveSection(id);
       setActiveNav(id);
+      window.scrollTo({ top: 0, behavior: "auto" });
       history.replaceState(null, "", `#${id}`);
       overlay.classList.remove("is-fading-out");
       overlay.classList.add("is-fading-in");
@@ -172,4 +189,11 @@ const initPageNavigation = () => {
 
   window.addEventListener("hashchange", () => handleNavigate(location.hash));
   handleNavigate(location.hash, true);
+
+  window.addEventListener("resize", () => {
+    const active = document.querySelector(".page-section.is-active");
+    if (active) {
+      syncMainHeight(active);
+    }
+  });
 };
