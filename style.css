@@ -524,6 +524,7 @@ padding: 0.5rem;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 40px;
   align-items: center;
+  height: 85vh;
 }
 
 
