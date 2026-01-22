@@ -1,0 +1,502 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Julius+Sans+One&family=Poiret+One&display=swap');
+
+.josefin-sans-200 {
+  font-family: "Josefin Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.bebas-neue-regular {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.poiret-one-regular {
+  font-family: "Poiret One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.julius-sans-one-regular {
+  font-family: "Julius Sans One", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.fontsize25 {
+  font-size: 4.5rem;
+}
+
+
+header {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    flex-shrink: 1;
+    z-index: 0;
+}
+
+.move-container {
+    flex-grow: 1;
+}
+
+.move-head {
+    flex-shrink: 1;
+    position: relative;
+    animation: title 105s linear infinite alternate;
+}
+
+@keyframes title {
+    0%   {color:red; left:0px; top:0px;}
+  /* 25%  {background-color:yellow; left:200px; top:0px;} */
+  50%  {color:rgb(255, 255, 255); left:100%; top:0;}
+  /* 75%  {background-color:green; left:0px; top:200px;} */
+  100% {color:red; left:0px; top:0px;}
+}
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+:root {
+  --color-bg1: rgb(255, 255, 255);
+  --color-bg2: rgb(187, 178, 151);
+  /* --color1: 18, 113, 255;
+  --color2: 107, 74, 255;
+  --color3: 100, 100, 255;
+  --color4: 50, 160, 220;
+  --color5: 80, 47, 122;
+  --color-interactive: 140, 100, 255; */
+  --color1: 237, 240, 234;
+  --color2: 234, 240, 240;
+  --color3: 240, 234, 234;
+  --color4: 211, 217, 228;
+  --color5: 240, 242, 223;
+  --color-interactive: 255, 254, 250;
+  --circle-size: 80%;
+  --blending: soft-light;
+}
+
+
+* {
+  margin:0;
+  padding:0;
+  outline:none;
+  list-style:none;
+  text-decoration:none;
+  box-sizing:border-box;
+  color:#0f101f;
+  background: transparent;
+  border:none;
+}
+
+html, body {
+  font-family: 'Dongle', sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background: #000000;
+  font-family: 'Montserrat', sans-serif;
+  overflow: hidden;
+  display: flex;
+}
+
+h1, h2, h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+}
+
+img {
+  height: auto;
+}
+
+button {
+  position: relative;
+  margin: 0;
+  padding: 1rem;
+  font-family: fantasy;
+  font-size: 2rem;
+  border: 0 solid #0f101f;
+  font-weight: 400;
+  text-align: center;
+  justify-content: center;
+  border: 5px solid rgb(34, 70, 31);
+  transition: all 200ms ease-out;
+
+}
+
+/* button:after {
+  width: 0px;
+  height: 23px;
+  position: relative;
+  top: -1rem;
+  z-index: -1;
+  } */
+
+  button:before, button:after {
+    border-radius: 0;
+    transition: all 200ms ease-in-out;
+    
+  }
+
+  button:hover {
+    border-radius: 50px;
+    cursor: pointer;
+  }
+
+
+
+.id {
+  border: 5px dotted blue;
+}
+
+.containerHeight {
+  height: 100%;
+}
+
+.genPad {
+  padding: 0.5rem;
+  margin: 0;
+}
+
+.flexgrow {
+  flex-grow: 1;
+}
+
+.flexrow {
+  display: flex;
+  flex-direction: row;
+}
+
+.flexrowwrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+
+.flexrowwrapM {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2px;
+
+}
+
+.flexrowwrapM h1, .flexrowwrapM h2, .flexrowwrapM h3 {
+  transition: transform 0.9s ease;
+}
+
+.flexrowwrapM h1 {
+  font-family: "Bebas Neue", sans-serif;
+}
+
+.flexrowwrapM h2 {
+  font-family: "Josefin Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: 2.5rem;
+}
+
+.flexrowwrapM h3 {
+  font-family: "Poiret One", sans-serif;
+  font-size: 2rem;
+}
+
+
+
+.flexColwrap {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  flex-grow: 1;
+}
+
+.flexright {
+  justify-content: flex-end;
+}
+
+.flexBetween {
+  justify-content: space-between;
+}
+
+.flexAround {
+  justify-content: space-around;
+}
+
+.flexEvenly {
+  justify-content: space-evenly;
+}
+
+.justRight {
+  align-items: right;
+  justify-content: right;
+  text-align: right;
+}
+
+.imageSmall {
+  width: 65px;
+  height: auto;
+  
+}
+
+.spinner {
+  position: relative;
+  transform-origin: calc(50% + 400px);
+
+  animation: spinner 2s ease-in-out ;
+}
+
+@keyframes spinner {
+  
+    0% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(270deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+
+}
+
+.imagePic {
+  /* border-radius: 15px;
+  box-shadow: 2px 2px 15px black; */
+  height: 100%;
+  width: auto;
+}
+
+.mainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  width: 100%;
+  height: 100vh
+}
+
+/* .card {
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  user-select: none;
+  max-width: 600px;
+  padding: 48px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  box-shadow: 0 4px 90px rgba(0,0,0,0.1);
+  overflow: hidden;
+  &:before {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 34%, rgba(255,255,255,1) 89%, rgba(255,255,255,0) 100%);
+    opacity: 0.3;
+    filter: blur(.5px);
+    mix-blend-mode: hard-light;
+  } */
+
+
+  .noise {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    opacity: 0.1;
+  }
+
+  .content {
+    position: relative;
+    z-index: 2;
+    text-shadow: -3px 0px 2px rgba(0,0,0,0.1);
+  }
+
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+p {
+  line-height: 1.6;
+}
+
+
+@keyframes moveInCircle {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes moveVertical {
+  0% {
+    transform: translateY(-50%);
+  }
+  50% {
+    transform: translateY(50%);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes moveHorizontal {
+  0% {
+    transform: translateX(-50%) translateY(-10%);
+  }
+  50% {
+    transform: translateX(50%) translateY(10%);
+  }
+  100% {
+    transform: translateX(-50%) translateY(-10%);
+  }
+}
+
+
+.gradient-bg {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(40deg, var(--color-bg1), var(--color-bg2));
+  top: 0;
+  left: 0;
+
+  .svgBlur {
+    display: none;
+  }
+
+  .noiseBg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    mix-blend-mode: soft-light;
+    opacity: 0.3;
+  }
+  .gradients-container {
+    filter: url(#goo) blur(40px) ;
+    width: 100%;
+    height: 100%;
+  }
+
+  .g1 {
+    position: absolute;
+    background: radial-gradient(circle at center, rgba(var(--color1), 0.8) 0, rgba(var(--color1), 0) 50%) no-repeat;
+    mix-blend-mode: var(--blending);
+
+    width: var(--circle-size);
+    height: var(--circle-size);
+    top: calc(50% - var(--circle-size) / 2);
+    left: calc(50% - var(--circle-size) / 2);
+
+    transform-origin: center center;
+    animation: moveVertical 120s ease infinite;
+
+    opacity: 1;
+  }
+
+  .g2 {
+    position: absolute;
+    background: radial-gradient(circle at center, rgba(var(--color2), 0.8) 0, rgba(var(--color2), 0) 50%) no-repeat;
+    mix-blend-mode: var(--blending);
+
+    width: var(--circle-size);
+    height: var(--circle-size);
+    top: calc(50% - var(--circle-size) / 2);
+    left: calc(50% - var(--circle-size) / 2);
+
+    transform-origin: calc(50% - 400px);
+    animation: moveInCircle 120s reverse infinite;
+
+    opacity: 1;
+  }
+
+  .g3 {
+    position: absolute;
+    background: radial-gradient(circle at center, rgba(var(--color3), 0.8) 0, rgba(var(--color3), 0) 50%) no-repeat;
+    mix-blend-mode: var(--blending);
+
+    width: var(--circle-size);
+    height: var(--circle-size);
+    top: calc(50% - var(--circle-size) / 2 + 200px);
+    left: calc(50% - var(--circle-size) / 2 - 500px);
+
+    transform-origin: calc(50% + 400px);
+    animation: moveInCircle 40s linear infinite;
+
+    opacity: 1;
+  }
+
+  .g4 {
+    position: absolute;
+    background: radial-gradient(circle at center, rgba(var(--color4), 0.8) 0, rgba(var(--color4), 0) 50%) no-repeat;
+    mix-blend-mode: var(--blending);
+
+    width: var(--circle-size);
+    height: var(--circle-size);
+    top: calc(50% - var(--circle-size) / 2);
+    left: calc(50% - var(--circle-size) / 2);
+
+    transform-origin: calc(50% - 200px);
+    animation: moveHorizontal 40s ease infinite;
+
+    opacity: 0.7;
+  }
+
+  .g5 {
+    position: absolute;
+    background: radial-gradient(circle at center, rgba(var(--color5), 0.8) 0, rgba(var(--color5), 0) 50%) no-repeat;
+    mix-blend-mode: var(--blending);
+
+    width: calc(var(--circle-size) * 2);
+    height: calc(var(--circle-size) * 2);
+    top: calc(50% - var(--circle-size));
+    left: calc(50% - var(--circle-size));
+
+    transform-origin: calc(50% - 800px) calc(50% + 200px);
+    animation: moveInCircle 20s ease infinite;
+
+    opacity: 1;
+  }
+
+  .interactive {
+    position: absolute;
+    background: radial-gradient(circle at center, rgba(var(--color-interactive), 0.8) 0, rgba(var(--color-interactive), 0) 50%) no-repeat;
+    mix-blend-mode: var(--blending);
+
+    width: 100%;
+    height: 100%;
+    top: -50%;
+    left: -50%;
+
+    opacity: 0.7;
+  }
+}
