@@ -415,6 +415,37 @@ padding: 0.5rem;
   height: 100vh;
 }
 
+.me-me {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    filter: blur(10px) brightness(0.65);
+    animation: blurIt 3s ease-in-out;
+}
+
+@keyframes blurIt {
+    0% {
+        filter: blur(0) brightness(1);        
+    }
+    
+    100% {
+        filter: blur(10px) brightness(0.65) ;
+    }
+}
+
+@keyframes reverseBlurIt {
+    0% {
+        filter: blur(10px) brightness(0);
+    }
+    100% {
+        filter: blur(0) brightness(1);
+    }
+}
+
 .hero::before {
   content: "";
   position: absolute;
@@ -434,11 +465,16 @@ padding: 0.5rem;
   padding: 0.5rem 0;
   position: absolute;
   top:0;
-  left: -25px;
-  filter: blur(5px) brightness(0.25);
-  z-index: -1;
+  left: 10px;
+  filter: blur(10px) brightness(0.65);
+  z-index: 0;
+  animation: blurIt 3s ease-in-out;
 }
 
+.hero-grid {
+  filter: blur(0);
+  animation:reverseBlurIt 3s ease-in-out;
+}
 
 .hero > .container {
   position: relative;
@@ -457,6 +493,8 @@ padding: 0.5rem;
   gap: 40px;
   align-items: center;
 }
+
+
 
 .hero-content h1 {
   font-family: "Playfair Display", serif;
