@@ -557,7 +557,7 @@ padding: 0.5rem;
   padding: 16px 18px;
   border-radius: 16px;
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(8, 1, 20, 0.2);
 }
 
 .pillar h3 {
