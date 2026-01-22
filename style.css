@@ -356,6 +356,7 @@ padding: 0.5rem;
   transform: translateY(0) scale(1.04);
   pointer-events: none;
   transition: opacity 1.2s ease, transform 1.2s ease;
+  visibility: hidden;
 }
 
 .page-section.is-active {
@@ -363,11 +364,26 @@ padding: 0.5rem;
   transform: translateY(0) scale(1);
   pointer-events: auto;
   z-index: 1;
+  visibility: visible;
 }
 
 .page-section.is-entering {
   opacity: 0;
   transform: translateY(0) scale(1.08);
+  visibility: visible;
+}
+
+.page-section:not(.is-active) .g1,
+.page-section:not(.is-active) .g2,
+.page-section:not(.is-active) .g3,
+.page-section:not(.is-active) .g4,
+.page-section:not(.is-active) .g5 {
+  animation-play-state: paused;
+}
+
+.page-section:not(.is-active) .interactive,
+.page-section:not(.is-active) .gradient-bg::after {
+  opacity: 0;
 }
 
 .page-section .container {
