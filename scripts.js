@@ -76,9 +76,178 @@ const initInteractiveBackground = () => {
   ease();
 };
 
+const initHeroConstellation = () => {
+  const hero = document.getElementById("hero");
+  const canvas = document.getElementById("hero-constellation");
+  if (!hero || !canvas || !(canvas instanceof HTMLCanvasElement)) return;
+
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  let stars = [];
+  let mouseX = -100;
+  let mouseY = -100;
+  let rafId = 0;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  const starDensity = () => {
+    const w = canvas.clientWidth || 1;
+    const h = canvas.clientHeight || 1;
+    return Math.min(140, Math.max(48, Math.floor((w * h) / 9000)));
+  };
+
+  const buildStars = (width, height) => {
+    const pad = 16;
+    const count = starDensity();
+    const list = [];
+    for (let i = 0; i < count; i++) {
+      list.push({
+        x: pad + Math.random() * Math.max(1, width - 2 * pad),
+        y: pad + Math.random() * Math.max(1, height - 2 * pad),
+      });
+    }
+    return list;
+  };
+
+  const syncCanvasSize = () => {
+    const w = hero.clientWidth;
+    const h = hero.clientHeight;
+    if (w < 1 || h < 1) return;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.floor(w * dpr);
+    canvas.height = Math.floor(h * dpr);
+    canvas.style.width = `${w}px`;
+    canvas.style.height = `${h}px`;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    stars = buildStars(w, h);
+  };
+
+  const drawStaticStars = () => {
+    if (!ctx) return;
+    for (const star of stars) {
+      ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
+      ctx.beginPath();
+      ctx.arc(star.x, star.y, 2, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  };
+
+  const animateConstellation = () => {
+    if (!ctx) return;
+
+    const w = canvas.clientWidth;
+    const h = canvas.clientHeight;
+    ctx.clearRect(0, 0, w, h);
+
+    const connectionRadius = 100;
+
+    for (const star of stars) {
+      const dist = Math.hypot(star.x - mouseX, star.y - mouseY);
+      if (dist < connectionRadius) {
+        const opacity = 1 - dist / connectionRadius;
+        ctx.strokeStyle = `rgba(147, 197, 253, ${opacity * 0.8})`;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(mouseX, mouseY);
+        ctx.lineTo(star.x, star.y);
+        ctx.stroke();
+
+        for (const other of stars) {
+          if (other === star) continue;
+          const starDist = Math.hypot(star.x - other.x, star.y - other.y);
+          const otherMouseDist = Math.hypot(other.x - mouseX, other.y - mouseY);
+          if (starDist < 80 && otherMouseDist < connectionRadius) {
+            const lineOpacity = (1 - starDist / 80) * opacity * 0.5;
+            ctx.strokeStyle = `rgba(147, 197, 253, ${lineOpacity})`;
+            ctx.beginPath();
+            ctx.moveTo(star.x, star.y);
+            ctx.lineTo(other.x, other.y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    for (const star of stars) {
+      const dist = Math.hypot(star.x - mouseX, star.y - mouseY);
+      const isNear = dist < connectionRadius;
+      const size = isNear ? 3 : 1.5;
+      const opacity = isNear ? 1 : 0.5;
+
+      ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+      ctx.beginPath();
+      ctx.arc(star.x, star.y, size, 0, Math.PI * 2);
+      ctx.fill();
+
+      if (isNear) {
+        ctx.fillStyle = `rgba(147, 197, 253, ${0.3 * (1 - dist / connectionRadius)})`;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, size + 4, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    rafId = requestAnimationFrame(animateConstellation);
+  };
+
+  const updatePointer = (clientX, clientY) => {
+    const rect = hero.getBoundingClientRect();
+    const inside =
+      clientX >= rect.left &&
+      clientX <= rect.right &&
+      clientY >= rect.top &&
+      clientY <= rect.bottom;
+    if (inside) {
+      mouseX = clientX - rect.left;
+      mouseY = clientY - rect.top;
+    } else {
+      mouseX = -100;
+      mouseY = -100;
+    }
+  };
+
+  const onPointerMove = (e) => {
+    updatePointer(e.clientX, e.clientY);
+  };
+
+  const onPointerLeaveWindow = () => {
+    mouseX = -100;
+    mouseY = -100;
+  };
+
+  const startLoop = () => {
+    cancelAnimationFrame(rafId);
+    syncCanvasSize();
+    const cw = canvas.clientWidth;
+    const ch = canvas.clientHeight;
+    if (reduceMotion.matches) {
+      ctx.clearRect(0, 0, cw, ch);
+      drawStaticStars();
+      return;
+    }
+    animateConstellation();
+  };
+
+  const ro = new ResizeObserver(() => {
+    startLoop();
+  });
+  ro.observe(hero);
+
+  reduceMotion.addEventListener("change", () => {
+    startLoop();
+  });
+
+  window.addEventListener("pointermove", onPointerMove, { passive: true });
+  window.addEventListener("blur", onPointerLeaveWindow);
+  document.addEventListener("mouseleave", onPointerLeaveWindow);
+
+  startLoop();
+};
+
 document.addEventListener("DOMContentLoaded", () => {
   revealOnScroll();
   initInteractiveBackground();
+  initHeroConstellation();
   initPageNavigation();
 });
 

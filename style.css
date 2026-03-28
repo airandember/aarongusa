@@ -211,12 +211,23 @@ h1 {
   animation: moveInCircle 20s ease infinite;
 }
 
-.gradient-bg .interactive {
-  background: radial-gradient(circle at center, rgba(var(--color-interactive), 0.95) 0, rgba(var(--color-interactive), 0) 60%) no-repeat;
+  .gradient-bg .interactive {
+    background: radial-gradient(circle at center, rgba(var(--color-interactive), 0.95) 0, rgba(var(--color-interactive), 0) 60%) no-repeat;
+    width: 100%;
+    height: 100%;
+    top: -20%;
+    left: -30%;
+    opacity: 1;
+    will-change: transform;
+    transition: opacity 0.6s ease;
+  }
+
+.gradient-bg-creative .interactive-creative {
+  background: radial-gradient(circle at center, rgba(var(--color-interactive-creative), 0.95) 0, rgba(var(--color-interactive-creative), 0) 60%) no-repeat;
   width: 100%;
   height: 100%;
-  top: -50%;
-  left: -50%;
+  top: -20%;
+  left: -30%;
   opacity: 1;
   will-change: transform;
   transition: opacity 0.6s ease;
@@ -227,15 +238,15 @@ h1 {
 }
 
 .gradient--hero {
-  --color-bg1: #00140a;
-  --color-bg2: #001333;
+  --color-bg1: #000503;
+  --color-bg2: #00060f;
   --color-bg3: rgb(42, 77, 72);
   --color1: 42, 42, 77;
   --color2: 42, 61, 77;
   --color3: 42, 77, 65;
   --color4: 77, 66, 42;
   --color5: 42, 77, 72;
-  --color-interactive: 44, 68, 110;
+  --color-interactive: 7, 14, 14;
 }
 
 .gradient--professional {
@@ -246,7 +257,7 @@ h1 {
   --color3: 46, 64, 92;
   --color4: 22, 32, 48;
   --color5: 30, 44, 68;
-  --color-interactive: 44, 68, 110;
+  --color-interactive: 34, 50, 70;
 }
 
 .gradient--creative {
@@ -263,12 +274,12 @@ h1 {
 .gradient--personal {
   --color-bg1: #f6f1ea;
   --color-bg2: #f9f6f1;
-  --color1: 210, 187, 148;
+  --color1: rgb(34, 50, 70);
   --color2: 203, 219, 205;
   --color3: 187, 169, 133;
   --color4: 235, 228, 216;
   --color5: 172, 198, 182;
-  --color-interactive: 193, 170, 118;
+  --color-interactive: 255, 236, 203;
 }
 
 .gradient--personal::after {
@@ -447,6 +458,15 @@ padding: 0.5rem;
   height: max-content;
 }
 
+.hero-constellation {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
 .hero.hero-animate .me-me {
     position: absolute;
     top: 0;
@@ -510,7 +530,7 @@ padding: 0.5rem;
 
 .hero > .container {
   position: relative;
-  z-index: 1;
+  z-index: 3;
 }
 
 .section > .container {
